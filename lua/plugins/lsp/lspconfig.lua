@@ -49,10 +49,12 @@ return {
       keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
       opts.desc = "Go to previous diagnostic"
-      keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
+      keymap.set("n", "[d", function() vim.diagnostic.jump({count = -1, float = true}) end, opts) -- jump to previous diagnostic in buffer
 
       opts.desc = "Go to next diagnostic"
-      keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
+      keymap.set("n", "]d",function ()
+        vim.diagnostic.jump({count = 1, float = true})
+      end , opts) -- jump to next diagnostic in buffer
 
       opts.desc = "Show documentation for what is under cursor"
       keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
@@ -66,13 +68,18 @@ return {
 
     -- Change the Diagnostic symbols in the sign column (gutter)
     -- (not in youtube nvim video)
-    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
+    vim.diagnostic.config({
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = " ",
+          [vim.diagnostic.severity.WARN] = " ",
+          [vim.diagnostic.severity.HINT] = "󰠠 ",
+          [vim.diagnostic.severity.INFO] = " ",
+        }
+      }
+    })
     -- configure lua server
-    lspconfig["lua_ls"].setup({
+    vim.lsp.config("lua_ls", {
       capabilities = capabilities,
       on_attach = on_attach,
       settings = { -- custom settings for lua
@@ -91,24 +98,26 @@ return {
         },
       },
     })
+    vim.lsp.enable("lua_ls")
     -- configure bash server
-    lspconfig["bashls"].setup({
+    vim.lsp.config("bashls", {
       capabilities = capabilities,
       on_attach = on_attach,
       filetypes = {"sh"},
     })
+    vim.lsp.enable("bashls")
     -- configure tex server
-    lspconfig["texlab"].setup({
+    vim.lsp.config("texlab", {
       capabilities = capabilities,
       on_attach = on_attach,
     })
+    vim.lsp.enable("texlab")
 
-    lspconfig["ltex"].setup({
+    vim.lsp.config("ltex", {
       capabilities = capabilities,
       on_attach = on_attach,
-      root_dir = lspconfig.util.root_pattern('.tex'),
     })
-
+    vim.lsp.enable("ltex")
     --lspconfig["shellcheck"].setup({
       --capabilities = capabilities,
       --on_attach = on_attach,

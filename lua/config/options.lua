@@ -44,6 +44,7 @@ vim.cmd([[
 	  return fnamemodify(bufname(buflist[winnr - 1]), ':t')
 	endfunction
 	set tabline=%!MyTabLine()
+  set clipboard+=unnamedplus
 ]])
 --line wrappin
 opt.wrap = false --prevent text from wrapping
@@ -59,7 +60,7 @@ opt.signcolumn = "yes"
 vim.api.nvim_set_hl(0, "EndOfBuffer", {fg = "#776561"}) -- change color of tilde
 
 -- clipboard
-opt.clipboard:append("unnamedplus") --force nvim to use system clipboard
+-- opt.clipboard:append("unnamedplus") --force nvim to use system clipboard
 
 -- split windows
 opt.splitright = true

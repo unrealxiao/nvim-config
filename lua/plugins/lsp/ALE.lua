@@ -7,6 +7,7 @@ return{
     g.ale_linters = {
       python = {'pylint'},
       sh = {'shellcheck'},
+      lua = {'lua_ls'},
     }
   end
 }
