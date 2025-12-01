@@ -26,13 +26,18 @@ return{
       },
     }
     wk.add({
-      mode = {"n", "v"},
+      mode = {"n"},
+      {"<leader>r", group = "+treesitter"},
+      {"<leader>ri", desc = "in normal mode, start increment selection"}
+      },
+      {
+      mode = {"v"},
       {"<leader>s", group = "+treesitter"},
-      {"<leader>si", desc = "in normal mode, start incremental selection", mode = "n"},
       {"<leader>sn", desc = "in visual mode, increment to the upper named parent", mode = "v"},
       {"<leader>ss", desc = "in visual mode, increment to the upper scope", mode = "v"},
       {"<leader>sd", desc = "in visual mode, decrement to the previous named node", mode = "v"},
-    })
+      }
+    )
   end
 }
 

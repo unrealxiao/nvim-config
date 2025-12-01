@@ -47,8 +47,11 @@ vim.cmd([[
   set clipboard+=unnamedplus
 ]])
 --line wrappin
-opt.wrap = false --prevent text from wrapping
-
+opt.wrap = true --prevent text from wrapping
+opt.linebreak = true --breaks lines at words or punctuations
+opt.breakindent = true --makes wrapped lines respect indentation
+opt.textwidth = 0
+opt.wrapmargin = 0 --text visually wraps to the edge of the window.
 --cursor line
 opt.cursorline = true
 
