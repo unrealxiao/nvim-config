@@ -113,11 +113,6 @@ return {
     })
     vim.lsp.enable("texlab")
 
-    vim.lsp.config("ltex", {
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-    vim.lsp.enable("ltex")
     --lspconfig["shellcheck"].setup({
       --capabilities = capabilities,
       --on_attach = on_attach,
