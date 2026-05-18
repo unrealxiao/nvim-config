@@ -13,10 +13,10 @@ return {
     local keymap = vim.keymap
     -- loads vscod style snippets from installed plugins
     require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/Luasnip"})
-    keymap.set({"i", "v"}, "<Tab>", function() luasnip.jump( 1) end, {silent = true},
-    {desc = "luasnip jump forward"})
-    keymap.set({"i", "v"}, "<S-Tab>", function() luasnip.jump(-1) end, {silent = true},
-    {desc = "luasnip jump backforward"})
+    keymap.set({"i", "v"}, "<Tab>", function() luasnip.jump( 1) end, {silent = true, desc = "luasnip jump forward"}
+    )
+    keymap.set({"i", "v"}, "<S-Tab>", function() luasnip.jump(-1) end, {silent = true,
+    desc = "luasnip jump backforward"})
     cmp.setup({
       completion = {
         completeopt = "menu,menuone,preview,noselect",
