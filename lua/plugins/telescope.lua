@@ -82,13 +82,13 @@ return{
       builtin.find_files({
         prompt_title = "Select Target Folder for Grep",
         -- Optimized 'fd' command to return directories only
-        find_command = { "fh", "--type", "d", "--hidden", "--exclude", ".git" },
+        find_command = { "fd", ".", "--type", "d", "--hidden", "--exclude", ".git" },
         attach_mappings = function(prompt_bufnr)
           actions.select_default:replace(function()
             local selection = action_state.get_selected_entry()
             actions.close(prompt_bufnr)
             if selection then
-              builtin.live_grep({ search_dirs = { selection.value } })
+              builtin.live_grep({ search_dirs = {selection.value} })
             end
           end)
           return true
