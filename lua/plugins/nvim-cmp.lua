@@ -6,17 +6,37 @@ return {
     "hrsh7th/cmp-path", -- file style path
     {"L3MON4D3/LuaSnip", version = "v2.*", build = "make install_jsregexp"}, -- snippet engine
     "saadparwaiz1/cmp_luasnip", -- luasnip autocompletion
+    "nvim-telescope/telescope-ui-select.nvim", --set vim.ui.select to telescope
+    "nvim-telescope/telescope.nvim",
   },
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
     local keymap = vim.keymap
-    -- loads vscod style snippets from installed plugins
+
+    -- Luasnip related config
     require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/Luasnip"})
-    keymap.set({"i", "v"}, "<Tab>", function() luasnip.jump( 1) end, {silent = true, desc = "luasnip jump forward"}
-    )
+    keymap.set({"i", "v"}, "<Tab>", function() luasnip.jump( 1) end, {silent = true, desc = "luasnip jump forward"}) --jump to next insert node
     keymap.set({"i", "v"}, "<S-Tab>", function() luasnip.jump(-1) end, {silent = true,
-    desc = "luasnip jump backforward"})
+    desc = "luasnip jump backforward"}) --jump to previous insert node
+    keymap.set({"i", "s"}, "<C-o>", function ()
+      if luasnip.choice_active() then
+        luasnip.change_choice(1)
+      end
+    end, {silent = true}) --switch to different choices in a choice node
+    require("telescope").setup({
+      extensions = {
+        ["ui-select"] = {require("telescope.themes").get_dropdown {}}
+      }
+    })
+    require("telescope").load_extension("ui-select")
+    keymap.set({"i", "s"}, "<C-h>", function ()
+      if luasnip.choice_active() then
+        require("luasnip.extras.select_choice")()
+      end
+    end, {desc = "select luasnip choice with telescope"})
+    --nvim-cmp related setting
+
     cmp.setup({
       completion = {
         completeopt = "menu,menuone,preview,noselect",
