@@ -13,17 +13,22 @@ return {
     local cmp = require("cmp")
     local luasnip = require("luasnip")
     local keymap = vim.keymap
-
     -- Luasnip related config
     require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/Luasnip"})
+    local types = require("luasnip.util.types")
+
+    luasnip.config.setup({
+      ext_opts = {
+        [types.choiceNode] = {
+          active = {
+            virt_text = { { "󰥪 Choice Available", "DiagnosticInfo" } },
+          },
+        },
+      },
+    })
     keymap.set({"i", "v"}, "<Tab>", function() luasnip.jump( 1) end, {silent = true, desc = "luasnip jump forward"}) --jump to next insert node
     keymap.set({"i", "v"}, "<S-Tab>", function() luasnip.jump(-1) end, {silent = true,
     desc = "luasnip jump backforward"}) --jump to previous insert node
-    keymap.set({"i", "s"}, "<C-o>", function ()
-      if luasnip.choice_active() then
-        luasnip.change_choice(1)
-      end
-    end, {silent = true}) --switch to different choices in a choice node
     require("telescope").setup({
       extensions = {
         ["ui-select"] = {require("telescope.themes").get_dropdown {}}
@@ -34,7 +39,17 @@ return {
       if luasnip.choice_active() then
         require("luasnip.extras.select_choice")()
       end
-    end, {desc = "select luasnip choice with telescope"})
+    end, {desc = "select luasnip choice with telescope"}) --switch choice with telescope
+    keymap.set({"i", "s"}, "<C-a>", function()
+      if luasnip.choice_active() then
+          luasnip.change_choice(1)
+      end
+    end, {silent = true, desc = "select luasnip choice"}) --switch choice in choice node
+    keymap.set({"i", "s"}, "<C-d>", function()
+      if luasnip.expand_or_jumpable() then
+        luasnip.unlink_current() -- Instantly kills the snippet session and clears virtual text
+      end
+    end, { desc = "Cancel Snippet" })
     --nvim-cmp related setting
 
     cmp.setup({
