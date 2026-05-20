@@ -14,6 +14,7 @@ return{
       {mode = "n"},
       {"<leader>b", group = "+buffer"},
       {"<leader>t", group = "+tab"},
+      {"<leader>s", group = "+window"}
    })
   end
 }

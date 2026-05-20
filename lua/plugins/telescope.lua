@@ -20,32 +20,6 @@ return{
     local pickers = require("telescope.pickers")
     local conf = require("telescope.config").values
 
-    --a custom function that passes outputs from other
-    --pickers to the live_grep 
-    telescope.setup({
-      defaults = {
-        mappings = {
-          i = {
-            -- [Method 3] Press Ctrl+G inside find_files to grep the selected items
-            ["<C-g>"] = function(prompt_bufnr)
-              local current_picker = action_state.get_current_picker(prompt_bufnr)
-              local multi_selections = current_picker:get_multi_selection()
-                local dirs = {}
-              if #multi_selections > 0 then
-                for _, selection in ipairs(multi_selections) do
-                  table.insert(dirs, selection.value)
-                end
-              else
-                local entry = action_state.get_selected_entry()
-                if entry then table.insert(dirs, entry.value) end
-                end
-              actions.close(prompt_bufnr)
-              builtin.live_grep({ search_dirs = dirs })
-            end,
-          },
-        },
-      },
-      })
     --keymapping
     wk.add({
       {mode = "n"},
