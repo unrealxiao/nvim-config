@@ -6,6 +6,7 @@ return{
    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
    "nvim-tree/nvim-web-devicons",
    "folke/which-key.nvim",
+   "rcarriga/nvim-notify",
   },
   config = function ()
     local telescope = require("telescope")
@@ -19,7 +20,8 @@ return{
     local finders = require("telescope.finders")
     local pickers = require("telescope.pickers")
     local conf = require("telescope.config").values
-
+    local notify = require("notify")
+    local action_utils = require("telescope.actions.utils")
     --keymapping
     wk.add({
       {mode = "n"},
@@ -69,5 +71,47 @@ return{
         end,
       })
     end, { desc = "Telescope Live Grep in Selected Folder" })
-  end,
+    --set up find files then grep_live within all the matching files
+    local function grep_filtered_files(prompt_bufnr)
+      local files = {}
+
+      -- Gather all matching entries currently visible in the filtered results list
+      action_utils.map_entries(prompt_bufnr, function(entry)
+          table.insert(files, entry[1] or entry.value)
+      end)
+
+      -- Close the current find_files Telescope window
+      actions.close(prompt_bufnr)
+
+      if vim.tbl_isempty(files) then
+          notify("No matching files found to grep within.", vim.log.levels.WARN,
+            {title = "telescope", timeout = 1000})
+          return
+      end
+
+      -- Launch live_grep strictly within those files
+      builtin.live_grep({
+          search_dirs = files,
+          prompt_title = "Live Grep (Within Filtered Files)",
+      })
+  end
+
+  -- 2. Create a wrapper function that attaches the keymap on-the-fly
+  local function find_files_then_grep()
+      notify("press Ctrl+g to pass files to live_grep", vim.log.levels.INFO, {
+        title = "telescope", timeout = 2000})
+      builtin.find_files({
+          attach_mappings = function(prompt_bufnr, map)
+              -- We bind <C-g> in both Insert (i) and Normal (n) modes inside this session
+              map({ "i", "n" }, "<C-g>", grep_filtered_files)
+              -- Keep standard Telescope keymaps working as normal
+              return true
+          end,
+      })
+  end
+
+  -- 3. Standard Neovim keymap definition
+  vim.keymap.set('n', '<leader>fb', find_files_then_grep, { desc = "Find files, then pass matched files to live_grep" })
+
+    end,
 }

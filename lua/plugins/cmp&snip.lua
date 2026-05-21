@@ -8,15 +8,17 @@ return {
     "saadparwaiz1/cmp_luasnip", -- luasnip autocompletion
     "nvim-telescope/telescope-ui-select.nvim", --set vim.ui.select to telescope
     "nvim-telescope/telescope.nvim",
+    "rcarriga/nvim-notify",
   },
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
     local keymap = vim.keymap
+    local notify = require("notify")
     -- Luasnip related config
     require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/Luasnip"})
     local types = require("luasnip.util.types")
-
+    --expand a virtual text whenever a choiceNode is Available
     luasnip.config.setup({
       ext_opts = {
         [types.choiceNode] = {
@@ -26,6 +28,24 @@ return {
         },
       },
     })
+    --expand a notification whenever a choiceNode is available
+    local luasnip_group = vim.api.nvim_create_augroup("LuaSnipChoicePopup", { clear = true })
+
+    -- 2. Listen to ChoiceNode events from LuaSnip
+    vim.api.nvim_create_autocmd("User", {
+        pattern = "LuasnipChoiceNodeEnter",
+        group = luasnip_group,
+        callback = function()
+            -- Use Neovim's built-in notifier. If you use a plugin like nvim-notify or 
+            -- noice.nvim, this will automatically look beautiful and float in the corner.
+            notify("Choice Node Available! Ctrl+a cycle | Ctrl+h Telescope search]", vim.log.levels.INFO, {
+                title = "LuaSnip",
+                timeout = 2000, -- Automatically disappears after 2 seconds
+            })
+        end,
+    })
+
+
     keymap.set({"i", "v"}, "<Tab>", function() luasnip.jump( 1) end, {silent = true, desc = "luasnip jump forward"}) --jump to next insert node
     keymap.set({"i", "v"}, "<S-Tab>", function() luasnip.jump(-1) end, {silent = true,
     desc = "luasnip jump backforward"}) --jump to previous insert node
@@ -45,7 +65,7 @@ return {
           luasnip.change_choice(1)
       end
     end, {silent = true, desc = "select luasnip choice"}) --switch choice in choice node
-    keymap.set({"i", "s"}, "<C-d>", function()
+    keymap.set({"i", "s", "n"}, "<C-d>", function()
       if luasnip.expand_or_jumpable() then
         luasnip.unlink_current() -- Instantly kills the snippet session and clears virtual text
       end
