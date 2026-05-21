@@ -8,6 +8,7 @@ return{
       python = {'pylint'},
       sh = {'shellcheck'},
       lua = {'lua_ls'},
+      tex = {'texlab'},
     }
   end
 }
