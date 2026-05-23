@@ -37,8 +37,14 @@ config = function()
   vim.cmd [[
   colorscheme nightfox
   ]]
-  --vim.g.lightline = {colorscheme = "nordfox"}
-
+  --additional color groups
+  vim.api.nvim_set_hl(0, "LuaSnipNode", {
+    fg = "#80F527",       -- Bright Green foreground text color
+    bg = "NONE",          -- Keep background transparent to avoid text boxes overlapping notes
+    italic = true,        -- Make it distinct from standard mathematical text strings
+    bold= true,
+})
+  
 
  end,
 }

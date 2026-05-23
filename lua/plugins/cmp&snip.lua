@@ -23,7 +23,12 @@ return {
       ext_opts = {
         [types.choiceNode] = {
           active = {
-            virt_text = { { "󰥪 Choice Available", "DiagnosticInfo" } },
+            virt_text = { { "󰥪 choiceNode Available(Ctrl+d del this text)", "LuaSnipNode" } },
+          },
+        },
+        [types.dynamicNode] = {
+          active = {
+            virt_text = { { "󰌇 dynamicNode Available(Ctrl+d del this text)", "LuaSnipNode" } },
           },
         },
       },
@@ -70,6 +75,14 @@ return {
         luasnip.unlink_current() -- Instantly kills the snippet session and clears virtual text
       end
     end, { desc = "Cancel Snippet" })
+    vim.keymap.set("n", "<leader><leader>s", function()
+      require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/Luasnip/" })
+      notify("Snippets reloaded!", vim.log.levels.INFO, {
+        title = "Luasnip",
+        timeout = 2000,
+      })
+    end, { desc = "Reload LuaSnip snippets" })
+
     --nvim-cmp related setting
 
     cmp.setup({
