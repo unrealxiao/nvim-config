@@ -34,4 +34,22 @@ return{
       }
     )
   ),
+  --snipet for Definition text bloock
+  s(
+    "Def", {
+      t("{\\large\\bfseries Definition "), i(1, "1.1"), t(".} \\\\"),
+      t({"", "{\\itshape "}), i(2, "main body of the Def"), t("\\par}")
+    }
+  ),
+  --snipet for Theorem text block
+
+  --snipet for math zone
+  s(
+    ";", c(
+      1, {
+        sn(nil, {t("$"), i(1, "main body"), t("$")}),
+        sn(nil, {t({"$$", "", "  "}), i(1, "main body"), t({"", "$$"})})
+      }
+    )
+  )
 }
