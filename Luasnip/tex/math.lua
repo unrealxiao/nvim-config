@@ -68,19 +68,21 @@ return{
   s(
     {trig = "int(%d)", regTrig = true},
     {
-      d(1, function (args, snip)
-        local dim = snip.captures[1]
+      d(1, function (_, parent)
+        local dim = tonumber(parent.snippet.trigger:match("%d")) or 1
         return generate_integrals({{tostring(dim)}})
       end),
       i(0),
     }
   ),
   s(
-    "oint",
+    {trig = "oint(%d)", regTrig = true},
     {
-      t("Dim: "), i(1, "2"), t({"", "\\"}),
-      d(2, countour_integrals, {1}),
-      i(0)
+      d(1, function (_, parent)
+        local dim = tonumber(parent.snippet.trigger:match("%d")) or 1
+        return countour_integrals({{tostring(dim)}})
+      end),
+      i(0),
     }
   ),
 }
