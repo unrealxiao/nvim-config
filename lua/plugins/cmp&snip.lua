@@ -49,11 +49,21 @@ return {
             })
         end,
     })
+    -- jump index forward by Tab
+    keymap.set({ "i", "s" }, "<Tab>", function()
+        if luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+        else
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+        end
+    end, { silent = true })
 
-
-    keymap.set({"i", "v"}, "<Tab>", function() luasnip.jump( 1) end, {silent = true, desc = "luasnip jump forward"}) --jump to next insert node
-    keymap.set({"i", "v"}, "<S-Tab>", function() luasnip.jump(-1) end, {silent = true,
-    desc = "luasnip jump backforward"}) --jump to previous insert node
+    -- Map Shift-Tab to jump backward
+    keymap.set({ "i", "s" }, "<S-Tab>", function()
+        if luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+        end
+    end, { silent = true })
     require("telescope").setup({
       extensions = {
         ["ui-select"] = {require("telescope.themes").get_dropdown {}}

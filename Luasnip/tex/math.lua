@@ -11,7 +11,6 @@ local d = ls.dynamic_node
 -- function for multi integral
 local generate_integrals = function(args)
     local dim = tonumber(args[1][1]) or 0
-    local exit_index = 3
     local nodes = {}
 
     if dim < 1 then
@@ -29,12 +28,9 @@ local generate_integrals = function(args)
     -- Add the core integrand input field
     table.insert(nodes, i(2, "f(x)"))
     -- Automatically generates differential variables.
-    for j = 1, dim do
-      table.insert(nodes, t("\\,d{"))
-      table.insert(nodes, i(exit_index, "x"))
-      table.insert(nodes, t("}"))
-    exit_index = exit_index + 1
-    end
+    table.insert(nodes, t("\\,d{"))
+    table.insert(nodes, i(3, "x"))
+    table.insert(nodes, t("}"))
 
     return sn(nil, nodes)
 end
@@ -43,7 +39,6 @@ end
 
 local countour_integrals = function(args)
     local dim = tonumber(args[1][1]) or 0
-    local exit_index = 3
     local nodes = {}
 
     if dim < 1 then
@@ -60,13 +55,10 @@ local countour_integrals = function(args)
 
     -- Add the core integrand input field
     table.insert(nodes, i(2, "f(x)"))
-    -- Automatically generates differential variables.
-    for j = 1, dim do
-      table.insert(nodes, t("\\,d{"))
-      table.insert(nodes, i(exit_index, "x"))
-      table.insert(nodes, t("}"))
-    exit_index = exit_index + 1
-    end
+    -- Add differential variables.
+    table.insert(nodes, t("\\,d{"))
+    table.insert(nodes, i(3, "x"))
+    table.insert(nodes, t("}"))
 
     return sn(nil, nodes)
 end
@@ -74,17 +66,19 @@ end
 return{
   --integral and multi integral
   s(
-    "int",
+    {trig = "int(%d)", regTrig = true},
     {
-      t("Dim: "), i(1, "2"), t({"", ""}),
-      d(2, generate_integrals, {1}),
-      i(0)
+      d(1, function (args, snip)
+        local dim = snip.captures[1]
+        return generate_integrals({{tostring(dim)}})
+      end),
+      i(0),
     }
   ),
   s(
     "oint",
     {
-      t("Dim: "), i(1, "2"), t({"", ""}),
+      t("Dim: "), i(1, "2"), t({"", "\\"}),
       d(2, countour_integrals, {1}),
       i(0)
     }
