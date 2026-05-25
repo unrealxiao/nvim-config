@@ -15,7 +15,7 @@ return{
   --snipet for figure and
   -- begin{} end{} pattern
   s(
-    "beg", c(
+    {trig = "beg", dscr = "the begining end box"}, c(
       1, {
       sn(nil, {
         t({"\\begin{"}), i(1), t({"}", ""}),
@@ -36,19 +36,47 @@ return{
   ),
   --snipet for Definition text bloock
   s(
-    "Def", {
-      t("{\\large\\bfseries Definition "), i(1, "1.1"), t(".} \\\\"),
-      t({"", "{\\itshape "}), i(2, "main body of the Def"), t("\\par}")
+    {trig = "Def", dscr = "Definition zone"}, {
+      t("{\\large\\bfseries Definition "), i(1, "1.1"), t("} \\\\"),
+      t({"", "{\\itshape "}), i(2, "main body of the Def"), t("\\par}"),
+      i(0)
     }
   ),
   --snipet for Theorem text block
-
+  s(
+    {trig = "Thm", dscr = "Theorem zone"}, {
+      t("\\begin{mathbox}", ""),
+      t({"", "  {\\large\\bfseries Theorem "}), i(1, "1.1"), t("} \\\\"),
+      t({"", "  "}), i(2, "main body"),
+      t({"", "\\end{mathbox}"}),
+      i(0)
+    }
+  ),
+  --snipet for proof
+  s(
+    {trig = "Pf", dscr = "proof zone"}, {
+      t("\\begin{leftlinebox}", ""),
+      t({"", "  {\\large\\itshape Proof.  }"}), i(1, "main body"),
+      t({"", "\\end{leftlinebox}"}),
+      i(0)
+    }
+  ),
+  --snipet for remark zone
+  s(
+    {trig = "Rem", dscr = "remark zone"}, {
+      t("\\begin{remarkbox}", ""),
+      t({"", "  {\\bfseries Remark.  }"}),
+      i(1, "main body"),
+      t({"", "\\end{remarkbox}"}),
+      i(0)
+    }
+  ),
   --snipet for math zone
   s(
-    ";", c(
+    {trig = ";", dscr = "math zone"}, c(
       1, {
-        sn(nil, {t("$"), i(1, "main body"), t("$")}),
-        sn(nil, {t({"$$", "", "  "}), i(1, "main body"), t({"", "$$"})})
+        sn(nil, {t("$"), i(1, "main body"), t("$"), i(0)}),
+        sn(nil, {t({"$$", "", "  "}), i(1, "main body"), t({"", "$$"}), i(0)})
       }
     )
   )

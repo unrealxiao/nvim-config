@@ -11,7 +11,7 @@ local d = ls.dynamic_node
 return{
   --lecture note template
   s(
-    "lecture", {
+    {trig = "lecture", dscr = "lecture template"}, {
       t(
         "\\documentclass[a4paper, 12pt]{report}"
       ),
@@ -31,19 +31,7 @@ return{
         "", "\\usepackage{sleek-title}"
       }),
       t({
-        "", "\\pagestyle{fancy}"
-      }),
-      t({
-        "", "\\renewcommand{\\headrulewidth}{0.8pt}"
-      }),
-      t({
-        "", "\\setlength{\\headheight}{15pt}"
-      }),
-      t({
-        "", "\\fancyhead[L]{\\leftmark}"
-      }),
-      t({
-        "", "\\fancyhead[R]{\\rightmark}"
+        "", "\\usepackage{sleek-theorems}"
       }),
       t({
         "", "\\institute{Indiana University}"

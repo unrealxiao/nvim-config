@@ -66,7 +66,7 @@ end
 return{
   --integral and multi integral
   s(
-    {trig = "int(%d)", regTrig = true},
+    {trig = "int(%d)", regTrig = true, dscr = "multi dimension integral symbols"},
     {
       d(1, function (_, parent)
         local dim = tonumber(parent.snippet.trigger:match("%d")) or 1
@@ -76,13 +76,45 @@ return{
     }
   ),
   s(
-    {trig = "oint(%d)", regTrig = true},
+    {trig = "oint(%d)", regTrig = true, dscr = "multi dimension countour integral symbol"},
     {
       d(1, function (_, parent)
         local dim = tonumber(parent.snippet.trigger:match("%d")) or 1
         return countour_integrals({{tostring(dim)}})
       end),
       i(0),
+    }
+  ),
+  --belong to symbol
+  s(
+    {trig = "belong", dscr = "∈ symbol"},
+    {
+      t("\\in"),
+      i(0)
+    }
+  ),
+  -- less equal symbol
+  s(
+    {trig = "lne", dscr = "<= symbol"},
+    {
+      t("\\le"),
+      i(0)
+    }
+  ),
+  -- greater equal
+  s(
+    {trig = "gne", dscr = ">= symbol"},
+    {
+      t("\\in"),
+      i(0)
+    }
+  ),
+  -- lambda
+  s(
+    {trig = "lam", dscr = "λ symbol"},
+    {
+      t("\\lambda"),
+      i(0)
     }
   ),
 }
