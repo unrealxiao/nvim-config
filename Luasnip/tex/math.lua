@@ -87,7 +87,7 @@ return{
   ),
   --belong to symbol
   s(
-    {trig = "belong", dscr = "∈ symbol"},
+    {trig = "bel", dscr = "∈ symbol"},
     {
       t("\\in"),
       i(0)
@@ -109,11 +109,99 @@ return{
       i(0)
     }
   ),
+  --alpha
+  s(
+    {trig = "alp", dscr = "alpha symbol"},
+    {
+      t("\\alpha"),
+      i(0)
+    }
+  ),
+  --beta
+  s(
+    {trig = "bet", dscr = "beta symbol"},
+    {
+      t("\\beta"),
+      i(0)
+    }
+  ),
   -- lambda
   s(
     {trig = "lam", dscr = "λ symbol"},
     {
       t("\\lambda"),
+      i(0)
+    }
+  ),
+  -- Omega
+  s(
+    {trig = "ome", dscr = "Ω symbol"},
+    {
+      t("\\Omega"),
+      i(0)
+    }
+  ),
+  -- right arrow
+  s(
+    {trig = "ria", dscr = "right arrow symbol"},
+    {
+      t("\\rightarrow"),
+      i(0)
+    }
+  ),
+  -- fraction
+  s(
+    {trig = "fra", dscr = "fraction symbol"},
+    {
+      t("\\frac{"), i(1), t("}{"), i(2), t("}"),
+      i(0)
+    }
+  ),
+  -- power 
+  s(
+    {trig = "por", dscr = "∧ symbol"},
+    {
+      t("^{"), i(1), t("}"),
+      i(0)
+    }
+  ),
+  -- subscript
+  s(
+    {trig = "idx", dscr = "_ symbol"},
+    {
+      t("_{"), i(1), t("}"),
+      i(0)
+    }
+  ),
+  -- for any
+  s(
+    {trig = "foa", dscr = "∀ symbol"},
+    {
+      t("\\forall"),
+      i(0)
+    }
+  ),
+  -- exist
+  s(
+    {trig = "ext", dscr = "∃ symbol"},
+    {
+      t("\\exists"),
+      i(0)
+    }
+  ),
+  -- mathbb bold math
+  s(
+    {trig = "mab", dscr = "bold captital letter, used to indicate special sets"},
+    {
+      t("\\mathbb{"), i(1, "Z"), t("}"),
+      i(0)
+    }
+  ),
+  -- mathcal accent letters
+  s(
+    {trig = "mac", dscr = "bold captital letter, used for special accent"},
+    {
+      t("\\mathcal{"), i(1, "C"), t("}"),
       i(0)
     }
   ),

@@ -50,7 +50,7 @@ vim.cmd([[
 opt.wrap = true --prevent text from wrapping
 opt.linebreak = true --breaks lines at words or punctuations
 opt.breakindent = true --makes wrapped lines respect indentation
-opt.textwidth = 80
+opt.textwidth = 100
 opt.wrapmargin = 0 --text visually wraps to the edge of the window.
 --line breaking
 opt.formatoptions = "tcqn"

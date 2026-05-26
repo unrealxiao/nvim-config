@@ -6,6 +6,7 @@ local f = ls.function_node
 local c = ls.choice_node
 local sn = ls.snippet_node
 local d = ls.dynamic_node
+local r = ls.restore_node
 --repeat function
 local function rep(args,_,_)
   return args[1][1]
@@ -73,11 +74,41 @@ return{
   ),
   --snipet for math zone
   s(
-    {trig = ";", dscr = "math zone"}, c(
-      1, {
-        sn(nil, {t("$"), i(1, "main body"), t("$"), i(0)}),
-        sn(nil, {t({"$$", "", "  "}), i(1, "main body"), t({"", "$$"}), i(0)})
+    {trig = ";", dscr = "math zone"}, {
+      t("$"), i(1, "main body"), t("$"), i(0),
+    }
+  ),
+  --change bracket, including norm and absolute symbol
+  s(
+    {trig = "brk", dscr = "change the bracket"}, {
+      c(1,
+        {
+          sn(nil, {t("("), r(1, "user_text"), t(")") }),
+          sn(nil, {t("["), r(1, "user_text"), t("]") }),
+          sn(nil, {t("{"), r(1, "user_text"), t("}") }),
+        }
+      ),
+    },
+    {
+      stored = {
+        ["user_text"] = i(1, "default_text")
       }
-    )
-  )
+    }
+  ),
+  -- norm symbol and absolute value symbol
+  s(
+    {trig = "nom", dscr = "norm symbol and abs symbol"}, {
+      c(1,
+        {
+          sn(nil, {t("|"), r(1, "user_text"), t("|") }),
+          sn(nil, {t("||"), r(1, "user_text"), t("||") }),
+        }
+      ),
+    },
+    {
+      stored = {
+        ["user_text"] = i(1, "default_text")
+      }
+    }
+  ),
 }
