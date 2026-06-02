@@ -42,11 +42,15 @@ local function create_inkscape_figure() -- open Inkscape directly in LaTeX
 
     -- Sanitize name and build paths
     local filename = name:gsub('%s+', '-'):lower() .. '.svg'
-    local filepath = root_dir .. '/' .. filename
+    local filepath = root_dir .. '/figure/' .. filename
     local svg_content = [[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
       <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
       </svg>
     ]]
+    local dir = root_dir .. '/figure'
+    if vim.fn.isdirectory(dir) ==0 then
+      vim.fn.mkdir(dir, "p")
+    end
     local file = io.open(filepath, "w")
     if file then
         file:write(svg_content)

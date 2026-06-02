@@ -46,10 +46,20 @@ return{
   --snipet for Theorem text block
   s(
     {trig = "Thm", dscr = "Theorem zone"}, {
-      t("\\begin{mathbox}", ""),
+      t("\\begin{theorembox}", ""),
       t({"", "  {\\large\\bfseries Theorem "}), i(1, "1.1"), t("} \\\\"),
       t({"", "  "}), i(2, "main body"),
-      t({"", "\\end{mathbox}"}),
+      t({"", "\\end{theorembox}"}),
+      i(0)
+    }
+  ),
+  --snipet for Theorem label
+  s(
+    {trig = "Thml", dscr = "Labeled Theorem zone"}, {
+      t("\\begin{theorembox_label}[label="), i(1, "label"), t({"]", ""}),
+      t({"", "  {\\large\\bfseries "}), i(2, "theoremname"), t("} \\\\"),
+      t({"", "  "}), i(3, "main body"),
+      t({"", "\\end{theorembox_label}"}),
       i(0)
     }
   ),
@@ -109,6 +119,17 @@ return{
       stored = {
         ["user_text"] = i(1, "default_text")
       }
+    }
+  ),
+  -- put subscript text under the main text
+  s(
+    {trig = "und", dscr = "put text under main text"},
+    {
+      t("\\underset{"),
+      i(1, "text underneath"),
+      t("}{"),
+      i(2, "main text"),
+      t("}")
     }
   ),
 }

@@ -63,6 +63,43 @@ local countour_integrals = function(args)
     return sn(nil, nodes)
 end
 
+-- function for generating any n by m matrix
+
+local generate_matrix = function(_, parent)
+    -- Extract rows (m) and columns (n) from the regex capture groups
+    -- Example: "mat3x2" -> captures[1] = "3", captures[2] = "2"
+    local rows = tonumber(parent.snippet.captures[1]) or 2
+    local cols = tonumber(parent.snippet.captures[2]) or 2
+
+    local nodes = {}
+    local index = 1
+
+    -- Loop to generate the matrix body grid
+    for r = 1, rows do
+        for co = 1, cols do
+            if co == 1 then
+              table.insert(nodes, t("  "))
+            end
+            -- Create an editable insert node for each cell entry
+            table.insert(nodes, i(index, string.format("a_{%d%d}", r, co)))
+            index = index + 1
+
+            -- Column separator: Add " & " if it's not the last element in the row
+            if co < cols then
+                table.insert(nodes, t(" & "))
+            end
+        end
+
+        -- Row separator: Add " \\ " (escaped as "\\\\") if it's not the last row
+        if r < rows then
+        table.insert(nodes, t({" \\\\ ", ""}))
+        end
+    end
+
+    -- Wrap the final node grid array into a SnippetNode context
+    return sn(nil, nodes)
+end
+
 return{
   --integral and multi integral
   s(
@@ -90,6 +127,14 @@ return{
     {trig = "bel", dscr = "∈ symbol"},
     {
       t("\\in"),
+      i(0)
+    }
+  ),
+  -- subset symbol
+  s(
+    {trig = "sub", dscr = "⊂ symbol"},
+    {
+      t("\\subset"),
       i(0)
     }
   ),
@@ -141,6 +186,14 @@ return{
       i(0)
     }
   ),
+  --epsilon
+  s(
+    {trig = "eps", dscr = "ϵ symbol"},
+    {
+      t("\\epsilon"),
+      i(0)
+    }
+  ),
   -- right arrow
   s(
     {trig = "ria", dscr = "right arrow symbol"},
@@ -159,15 +212,31 @@ return{
   ),
   -- power 
   s(
-    {trig = "por", dscr = "∧ symbol"},
+    {trig = "6", dscr = "∧ symbol"},
     {
       t("^{"), i(1), t("}"),
       i(0)
     }
   ),
+  -- product symbol 
+  s(
+    {trig = "prd", dscr = "Π symbol"},
+    {
+      t("\\Pi"),
+      i(0)
+    }
+  ),
+  -- sum symbol
+  s(
+    {trig = "sum", dscr = "Σ symbol"},
+    {
+      t("\\Sigma"),
+      i(0)
+    }
+  ),
   -- subscript
   s(
-    {trig = "idx", dscr = "_ symbol"},
+    {trig = "-", dscr = "subscript symbol"},
     {
       t("_{"), i(1), t("}"),
       i(0)
@@ -199,9 +268,43 @@ return{
   ),
   -- mathcal accent letters
   s(
-    {trig = "mac", dscr = "bold captital letter, used for special accent"},
+    {trig = "mac", dscr = "captital letter, used for special accent"},
     {
       t("\\mathcal{"), i(1, "C"), t("}"),
+      i(0)
+    }
+  ),
+  -- math bm bold letters
+  s(
+    {trig = "bm", dscr = "bold letter"},
+    {
+      t("\\bm{"), i(1, "C"), t("}"),
+      i(0)
+    }
+  ),
+  -- matrix generation
+  s({
+        trig = "mat(%d)x(%d)",
+        regTrig = true,
+        wordTrig = false,
+        dscr = "Generates a completely dynamic m by n LaTeX matrix environment"
+    },
+    {
+        -- Begin the standard LaTeX math environment block
+        t({ "\\begin{bmatrix}", ""}),
+        -- Hook up the dynamic node to evaluate the grid dimensions
+        t(""), d(1, generate_matrix),
+        -- Close the environment block
+        t({"", "\\end{bmatrix}" }),
+        -- Absolute final jump point out of the matrix expression
+        i(0)
+    }
+  ),
+  -- not equal symbol
+  s(
+    {trig = "ne", dscr = "not equal symbol"},
+    {
+      t("\\neq"),
       i(0)
     }
   ),

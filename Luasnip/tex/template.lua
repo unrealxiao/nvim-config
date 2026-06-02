@@ -34,11 +34,17 @@ return{
         "", "\\usepackage{sleek-theorems}"
       }),
       t({
+        "", "\\graphicspath{{figure/}}"
+      }),
+      t({
         "", "\\institute{Indiana University}"
       }),
       t({
         "", "\\title{"
       }), i(1, "On the number of primes below a given magnitude"), t("}"),
+      t({
+        "", "\\subtitle{"
+      }), i(2, "subtitle"), t("}"),
       t({
         "", "\\author{\\textit{Author}\\\\Xiao \\textsc{Liu}}"
       }),
@@ -68,10 +74,10 @@ return{
       }),
       t({
         "", "  \\chapter{"
-      }), i(2, "Introduction"), t({"}", ""}),
+      }), i(3, "Introduction"), t({"}", ""}),
       t({
         "", "  \\section{"
-      }), i(3, "Sleek"), t({"}",}),
+      }), i(4, "Sleek"), t({"}",}),
       t({
         "", "\\end{document}"
       })
