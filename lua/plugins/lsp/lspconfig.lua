@@ -110,6 +110,11 @@ return {
     vim.lsp.config("texlab", {
       capabilities = capabilities,
       on_attach = on_attach,
+      settings = {
+        texlab = {
+          diagnostics = {ignoredPatterns = {"Undefined reference", "Failed to parse"}}
+        }
+      }
     })
     vim.lsp.enable("texlab")
 

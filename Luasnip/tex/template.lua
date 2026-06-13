@@ -83,4 +83,48 @@ return{
       })
     }
   ),
+  -- Homework solution template
+  s(
+    {trig = "hom", dscr = "homework template"}, {
+      t(
+        "\\documentclass[11pt]{article}"
+      ),
+      t({
+        "", "\\usepackage{setspace}"
+      }),
+      t({
+        "", "\\onehalfspacing"
+      }),
+      t({
+        "", "\\usepackage[english]{babel}"
+      }),
+      t({
+        "", "\\usepackage{assignment}"
+      }),
+      t({
+        "", "\\graphicspath{{figure/}}"
+      }),
+      t({
+        "", "\\begin{document}"
+      }),
+      t({
+        "", "  \\title{"
+      }), i(1, "On the number of primes below a given magnitude"), t("}"),
+      t({
+        "", "  \\author{Xiao \\textsc{Liu}}"
+      }),
+      t({
+        "", "  \\date{\\today}"
+      }),
+      t({
+        "", "  \\maketitle"
+      }),
+      t({
+        "", "  \\section{"
+      }), i(2, "problem 1"), t({"}"}),
+      t({
+        "", "\\end{document}"
+      })
+    }
+  ),
 }

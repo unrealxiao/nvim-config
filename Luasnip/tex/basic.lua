@@ -90,19 +90,14 @@ return{
   ),
   --change bracket, including norm and absolute symbol
   s(
-    {trig = "brk", dscr = "change the bracket"}, {
-      c(1,
-        {
-          sn(nil, {t("("), r(1, "user_text"), t(")") }),
-          sn(nil, {t("["), r(1, "user_text"), t("]") }),
-          sn(nil, {t("{"), r(1, "user_text"), t("}") }),
-        }
-      ),
-    },
-    {
-      stored = {
-        ["user_text"] = i(1, "default_text")
-      }
+    {trig = "brk", dscr = "multiline bracket"}, {
+      t("\\left\\{"),
+      t("\\begin{aligned}"),
+      t({"", "  &"}), i(1, "equation"), t(" \\\\"),
+      t({"", "  &"}), i(2, "equation"), t(" \\\\"),
+      t({"", "\\end{aligned}"}),
+      t("\\right."),
+      i(0)
     }
   ),
   -- norm symbol and absolute value symbol
@@ -121,14 +116,14 @@ return{
       }
     }
   ),
-  -- put subscript text under the main text
+  -- put subscript text above and under the main text
   s(
-    {trig = "und", dscr = "put text under main text"},
+    {trig = "abu", dscr = "put text above and under main text"},
     {
-      t("\\underset{"),
+      t("\\limits_{"),
       i(1, "text underneath"),
       t("}{"),
-      i(2, "main text"),
+      i(2, "text above"),
       t("}")
     }
   ),

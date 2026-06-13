@@ -7,6 +7,7 @@ local f = ls.function_node
 local c = ls.choice_node
 local sn = ls.snippet_node
 local d = ls.dynamic_node
+local r = ls.restore_node
 
 -- function for multi integral
 local generate_integrals = function(args)
@@ -130,12 +131,66 @@ return{
       i(0)
     }
   ),
+  --not belong to symbol
+  s(
+    {trig = "nbe", dscr = "∉ symbol"},
+    {
+      t("\\notin"),
+      i(0)
+    }
+  ),
   -- subset symbol
   s(
     {trig = "sub", dscr = "⊂ symbol"},
     {
       t("\\subset"),
       i(0)
+    }
+  ),
+  -- subset equal symbol
+  s(
+    {trig = "sue", dscr = "⊆ symbol"},
+    {
+      t("\\subseteq"),
+      i(0)
+    }
+  ),
+  -- superset 
+  s(
+    {trig = "sup", dscr = "⊃ symbol"},
+    {
+      t("\\supset"),
+      i(0)
+    }
+  ),
+  -- superset or equal
+  s(
+    {trig = "spe", dscr = "⊇ symbol"},
+    {
+      t("\\supseteq"),
+      i(0)
+    }
+  ),
+  -- union
+  s(
+    {trig = "uni", dscr = "union symbol"}, {c(
+      1,
+      {
+        sn(nil, {t("\\cup"), i(1), i(0)}),
+        sn(nil, {t("\\bigcup_{"), i(1), t("}^{"), i(2), t("}"), i(0)}),
+      }
+    ),
+    }
+  ),
+  -- intersect
+  s(
+    {trig = "int", dscr = "intersect symbol"}, {c(
+      1,
+      {
+        sn(nil, {t("\\cap"), i(1), i(0)}),
+        sn(nil, {t("\\bigcap_{"), i(1), t("}^{"), i(2), t("}"), i(0)}),
+      }
+    ),
     }
   ),
   -- less equal symbol
@@ -150,7 +205,7 @@ return{
   s(
     {trig = "gne", dscr = ">= symbol"},
     {
-      t("\\in"),
+      t("\\ge"),
       i(0)
     }
   ),
@@ -194,6 +249,14 @@ return{
       i(0)
     }
   ),
+  --phi variant
+  s(
+    {trig = "ph", dscr = "φ symbol"},
+    {
+      t("\\varphi"),
+      i(0)
+    }
+  ),
   -- right arrow
   s(
     {trig = "ria", dscr = "right arrow symbol"},
@@ -202,12 +265,21 @@ return{
       i(0)
     }
   ),
+  -- long right arrow
+  s(
+    {trig = "lra", dscr = "long right arrow symbol"},
+    {
+      t("\\longrightarrow"),
+      i(0)
+    }
+  ),
   -- fraction
   s(
     {trig = "fra", dscr = "fraction symbol"},
-    {
-      t("\\frac{"), i(1), t("}{"), i(2), t("}"),
-      i(0)
+    {c(1,{
+        sn(nil, {t("\\frac{"), i(1), t("}{"), i(2), t("}"), i(0)}),
+        sn(nil, {t("\\dfrac{"), i(1), t("}{"), i(2), t("}"), i(0)})
+    })
     }
   ),
   -- power 
@@ -228,9 +300,9 @@ return{
   ),
   -- sum symbol
   s(
-    {trig = "sum", dscr = "Σ symbol"},
+    {trig = "sm", dscr = "Σ symbol"},
     {
-      t("\\Sigma"),
+      t("\\sum"),
       i(0)
     }
   ),
@@ -305,6 +377,22 @@ return{
     {trig = "ne", dscr = "not equal symbol"},
     {
       t("\\neq"),
+      i(0)
+    }
+  ),
+  -- isomorphic symbol
+  s(
+    {trig = "iso", dscr = "≅ symbol"},
+    {
+      t("\\cong"),
+      i(0)
+    }
+  ),
+  -- direct sum symbol
+  s(
+    {trig = "drs", dscr = "⨁ symbol"},
+    {
+      t("\\oplus"),
       i(0)
     }
   ),
