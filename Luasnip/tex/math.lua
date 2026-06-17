@@ -241,6 +241,14 @@ return{
       i(0)
     }
   ),
+  -- mu
+  s(
+    {trig = "mu", dscr = "μ symbol"},
+    {
+      t("\\mu"),
+      i(0)
+    }
+  ),
   --epsilon
   s(
     {trig = "eps", dscr = "ϵ symbol"},
@@ -282,6 +290,22 @@ return{
     })
     }
   ),
+  -- limit
+  s(
+    {trig = "lim", dscr = "limit symbol"},
+    {
+      t("\\lim_{"), i(1), t("}"),
+      i(0)
+    }
+  ),
+  -- infinity
+  s(
+    {trig = "inf", dscr = "∞ symbol"},
+    {
+      t("\\infty"),
+      i(0)
+    }
+  ),
   -- power 
   s(
     {trig = "6", dscr = "∧ symbol"},
@@ -300,9 +324,9 @@ return{
   ),
   -- sum symbol
   s(
-    {trig = "sm", dscr = "Σ symbol"},
+    {trig = "sum", dscr = "Σ symbol"},
     {
-      t("\\sum"),
+      t("\\sum_"), i(1, "sub"), t("}^{"), i(2, "sup"), t("}"),
       i(0)
     }
   ),

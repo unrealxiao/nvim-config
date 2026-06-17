@@ -63,6 +63,16 @@ return{
       i(0)
     }
   ),
+  --snipet for Definition label
+  s(
+    {trig = "Defl", dscr = "Labeled Definition zone"}, {
+      t("\\begin{definitionbox_label}[label="), i(1, "label"), t({"]", ""}),
+      t({"", "  {\\bfseries "}), i(2, "theoremname"), t("} \\\\"),
+      t({"", "  {\\itshape "}), i(3, "main body"), t("\\par}"),
+      t({"", "\\end{definitionbox_label}"}),
+      i(0)
+    }
+  ),
   --snipet for proof
   s(
     {trig = "Pf", dscr = "proof zone"}, {
@@ -88,9 +98,9 @@ return{
       t("$"), i(1, "main body"), t("$"), i(0),
     }
   ),
-  --change bracket, including norm and absolute symbol
+  --multiline bracket
   s(
-    {trig = "brk", dscr = "multiline bracket"}, {
+    {trig = "mub", dscr = "multiline bracket"}, {
       t("\\left\\{"),
       t("\\begin{aligned}"),
       t({"", "  &"}), i(1, "equation"), t(" \\\\"),
@@ -100,13 +110,40 @@ return{
       i(0)
     }
   ),
+  --round bracket
+  s(
+    {trig = "rob", dscr = "round bracket"}, {
+      t("\\left("),
+      i(1, "content"),
+      t("\\right)"),
+      i(0)
+    }
+  ),
+  --angled bracket
+  s(
+    {trig = "anb", dscr = "round bracket"}, {
+      t("\\left\\langle"),
+      i(1, "content"),
+      t("\\right\\rangle"),
+      i(0)
+    }
+  ),
+  --curly bracket
+  s(
+    {trig = "cub", dscr = "round bracket"}, {
+      t("\\left\\{"),
+      i(1, "content"),
+      t("\\right\\}"),
+      i(0)
+    }
+  ),
   -- norm symbol and absolute value symbol
   s(
     {trig = "nom", dscr = "norm symbol and abs symbol"}, {
       c(1,
         {
-          sn(nil, {t("|"), r(1, "user_text"), t("|") }),
-          sn(nil, {t("||"), r(1, "user_text"), t("||") }),
+          sn(nil, {t("\\left|"), r(1, "user_text"), t("\\right|") }),
+          sn(nil, {t("\\left||"), r(1, "user_text"), t("\\right||") }),
         }
       ),
     },
