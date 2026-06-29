@@ -16,24 +16,47 @@ return{
   --snipet for figure and
   -- begin{} end{} pattern
   s(
-    {trig = "beg", dscr = "the begining end box"}, c(
-      1, {
-      sn(nil, {
-        t({"\\begin{"}), i(1), t({"}", ""}),
-        t({"  "}), i(2),
-        t({"", "\\end{"}), f(rep, {1}, {}), t({"}"}),
-        i(0)
-      }),
-      sn(nil, {
-        t({"\\begin{figure}["}), i(1), t({"]", ""}),
-        t({"  \\centering", ""}),
-        t({"  \\includegraphics[width=0.8\\textwidth]{"}), i(2, "image.png"), t({"}", ""}),
-        t({"  \\label{"}), i(3), t({"}", ""}),
-        t({"\\end{figure}"}),
-        i(0)
-      })
-      }
-    )
+    {trig = "beg", dscr = "the begining end box"},
+    {
+      t({"\\begin{"}), i(1), t({"}", ""}),
+      t({"  "}), i(2),
+      t({"", "\\end{"}), f(rep, {1}, {}), t({"}"}),
+      i(0)
+    }
+  ),
+  -- equation section 
+  s(
+    {trig = "equ", dscr = "the equation box"},
+    {
+      t({"\\begin{equation}"}),
+      t({"", "  "}), i(1),
+      t({"", "\\end{equation}"}),
+      i(0)
+    }
+  ),
+  -- align section 
+  s(
+    {trig = "ali", dscr = "align box"},
+    {
+      t({"\\begin{aligned}"}),
+      t({"", "  "}), i(1, "content"), t("&"), i(2, "content"), t(" \\\\"),
+      t({"", "  "}), i(3, "content"), t("&"), i(4, "content"), t(" \\\\"),
+      t({"", "\\end{aligned}"}),
+      i(0)
+    }
+  ),
+  -- graph section 
+  s(
+    {trig = "gra", dscr = "insert graph"},
+    {
+      t({"\\begin{figure}[htbp]"}),
+      t({"", "  \\centering"}),
+      t({"", "  \\includegraphics[width="}), i(1, "0.4"), t("\\textwidth]{"), i(2, "figure"), t("}"),
+      t({"", "  \\caption{"}), i(3, "caption"), t("}"),
+      t({"", "  \\label{"}), i(4, "figure label"), t("}"),
+      t({"", "\\end{figure}"}),
+      i(0)
+    }
   ),
   --snipet for Definition text bloock
   s(
@@ -121,7 +144,7 @@ return{
   ),
   --angled bracket
   s(
-    {trig = "anb", dscr = "round bracket"}, {
+    {trig = "anb", dscr = "angled bracket"}, {
       t("\\left\\langle"),
       i(1, "content"),
       t("\\right\\rangle"),
@@ -130,10 +153,19 @@ return{
   ),
   --curly bracket
   s(
-    {trig = "cub", dscr = "round bracket"}, {
+    {trig = "cub", dscr = "curly bracket"}, {
       t("\\left\\{"),
       i(1, "content"),
       t("\\right\\}"),
+      i(0)
+    }
+  ),
+  --square bracket
+  s(
+    {trig = "sqb", dscr = "square bracket"}, {
+      t("\\left["),
+      i(1, "content"),
+      t("\\right]"),
       i(0)
     }
   ),
@@ -143,7 +175,7 @@ return{
       c(1,
         {
           sn(nil, {t("\\left|"), r(1, "user_text"), t("\\right|") }),
-          sn(nil, {t("\\left||"), r(1, "user_text"), t("\\right||") }),
+          sn(nil, {t("\\left|\\left|"), r(1, "user_text"), t("\\right|\\right|") }),
         }
       ),
     },

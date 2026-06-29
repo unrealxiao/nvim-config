@@ -211,7 +211,7 @@ return{
   ),
   --alpha
   s(
-    {trig = "alp", dscr = "alpha symbol"},
+    {trig = "alp", dscr = "α symbol"},
     {
       t("\\alpha"),
       i(0)
@@ -219,9 +219,17 @@ return{
   ),
   --beta
   s(
-    {trig = "bet", dscr = "beta symbol"},
+    {trig = "bet", dscr = "β symbol"},
     {
       t("\\beta"),
+      i(0)
+    }
+  ),
+  --theta
+  s(
+    {trig = "the", dscr = "θ symbol"},
+    {
+      t("\\theta"),
       i(0)
     }
   ),
@@ -265,11 +273,43 @@ return{
       i(0)
     }
   ),
+  --sin operator
+  s(
+    {trig = "sin", dscr = "sin operator"},
+    {
+      t("\\sin"),
+      i(0)
+    }
+  ),
+  --cos operator
+  s(
+    {trig = "cos", dscr = "cos operator"},
+    {
+      t("\\cos"),
+      i(0)
+    }
+  ),
+  --tan operator
+  s(
+    {trig = "tan", dscr = "tan operator"},
+    {
+      t("\\tan"),
+      i(0)
+    }
+  ),
   -- right arrow
   s(
     {trig = "ria", dscr = "right arrow symbol"},
     {
       t("\\rightarrow"),
+      i(0)
+    }
+  ),
+  -- uniform convergence arrow
+  s(
+    {trig = "dra", dscr = "double right arrow symbol"},
+    {
+      t("\\rightrightarrows"),
       i(0)
     }
   ),
@@ -285,8 +325,8 @@ return{
   s(
     {trig = "fra", dscr = "fraction symbol"},
     {c(1,{
-        sn(nil, {t("\\frac{"), i(1), t("}{"), i(2), t("}"), i(0)}),
-        sn(nil, {t("\\dfrac{"), i(1), t("}{"), i(2), t("}"), i(0)})
+        sn(nil, {t("\\dfrac{"), i(1), t("}{"), i(2), t("}"), i(0)}),
+        sn(nil, {t("\\frac{"), i(1), t("}{"), i(2), t("}"), i(0)})
     })
     }
   ),
@@ -326,7 +366,7 @@ return{
   s(
     {trig = "sum", dscr = "Σ symbol"},
     {
-      t("\\sum_"), i(1, "sub"), t("}^{"), i(2, "sup"), t("}"),
+      t("\\sum_{"), i(1, "sub"), t("}^{"), i(2, "sup"), t("}"),
       i(0)
     }
   ),
@@ -417,6 +457,14 @@ return{
     {trig = "drs", dscr = "⨁ symbol"},
     {
       t("\\oplus"),
+      i(0)
+    }
+  ),
+  -- square root symbol
+  s(
+    {trig = "sqr", dscr = "√ symbol"},
+    {
+      t("\\sqrt{"), i(1, "content"), t("}"),
       i(0)
     }
   ),

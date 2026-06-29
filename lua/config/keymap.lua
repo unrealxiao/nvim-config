@@ -62,17 +62,17 @@ local function create_inkscape_figure() -- open Inkscape directly in LaTeX
 
     -- The \includesvg command needs to be relative to the root/main.tex
     -- depending on your document structure.
-    local boilerplate = {
-      "\\begin{figure}[htbp]",
-      "  \\centering",
-      string.format("  \\includegraphics[width=0.8\\textwidth]{%s.pdf}", name),
-      "  \\caption{Description}",
-      string.format("  \\label{fig:%s}", name),
-      "\\end{figure}"
-    }
+    --local boilerplate = {
+      --"\\begin{figure}[htbp]",
+      --" \\centering",
+      --string.format("  \\includegraphics[width=0.8\\textwidth]{%s.pdf}", name),
+      --"  \\caption{Description}",
+      --string.format("  \\label{fig:%s}", name),
+      --"\\end{figure}"
+    --}
     -- 3. Insert boilerplate into the current buffer
-    local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-    vim.api.nvim_buf_set_text(0, row - 1, col, row - 1, col, boilerplate)
+    --local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+    --vim.api.nvim_buf_set_text(0, row - 1, col, row - 1, col, boilerplate)
     -- Launch Inkscape as a background process
     -- 'detach = true' keeps Inkscape open even if you close Neovim
     vim.fn.jobstart(
@@ -87,4 +87,4 @@ local function create_inkscape_figure() -- open Inkscape directly in LaTeX
       }
     )
 end
-keymap.set('n', '<leader>g', create_inkscape_figure, { desc = 'Create Inkscape Figure' })
+keymap.set({"n"}, '<leader>g', create_inkscape_figure, { desc = 'Create Inkscape Figure' })
