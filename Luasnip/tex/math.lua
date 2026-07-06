@@ -82,7 +82,7 @@ local generate_matrix = function(_, parent)
               table.insert(nodes, t("  "))
             end
             -- Create an editable insert node for each cell entry
-            table.insert(nodes, i(index, string.format("a_{%d%d}", r, co)))
+            table.insert(nodes, i(index, ""))
             index = index + 1
 
             -- Column separator: Add " & " if it's not the last element in the row
@@ -121,6 +121,40 @@ return{
         return countour_integrals({{tostring(dim)}})
       end),
       i(0),
+    }
+  ),
+  --single ordinary integral
+  s(
+    {trig = "itg", dscr = "single integral symbol"},
+    {
+      t("\\int_{"), i(1), t("}^{"), i(2), t("} "),
+      i(3, "f"), t("\\; d"), i(4, "x"),
+      i(0),
+    }
+  ),
+
+  --partial derivative symbol
+  s(
+    {trig = "prt", dscr = "∂ symbol"},
+    {
+      t("\\partial"),
+      i(0)
+    }
+  ),
+  --partial derivative fraction
+  s(
+    {trig = "prf", dscr = "partial derivative fraction"},
+    {
+      t("\\frac{\\partial "), i(1), t("}{\\partial "), i(2), t("}"),
+      i(0)
+    }
+  ),
+  --ordinary derivative fraction
+  s(
+    {trig = "odf", dscr = "ordinary derivative fraction"},
+    {
+      t("\\frac{d "), i(1), t("}{d "), i(2), t("}"),
+      i(0)
     }
   ),
   --belong to symbol
@@ -209,6 +243,14 @@ return{
       i(0)
     }
   ),
+  -- triple equal
+  s(
+    {trig = "tre", dscr = "≡ symbol"},
+    {
+      t("\\equiv"),
+      i(0)
+    }
+  ),
   --alpha
   s(
     {trig = "alp", dscr = "α symbol"},
@@ -265,6 +307,22 @@ return{
       i(0)
     }
   ),
+  --delta
+  s(
+    {trig = "del", dscr = "δ symbol"},
+    {
+      t("\\delta"),
+      i(0)
+    }
+  ),
+  --nabla
+  s(
+    {trig = "nab", dscr = "∇ symbol"},
+    {
+      t("\\nabla"),
+      i(0)
+    }
+  ),
   --phi variant
   s(
     {trig = "ph", dscr = "φ symbol"},
@@ -286,6 +344,7 @@ return{
     {trig = "cos", dscr = "cos operator"},
     {
       t("\\cos"),
+
       i(0)
     }
   ),
@@ -460,11 +519,75 @@ return{
       i(0)
     }
   ),
+  -- dot product
+  s(
+    {trig = "dot", dscr = "dot product symbol"},
+    {
+      t("\\cdot"),
+      i(0)
+    }
+  ),
+  -- cross product
+  s(
+    {trig = "cro", dscr = "× symbol"},
+    {
+      t("\\times"),
+      i(0)
+    }
+  ),
   -- square root symbol
   s(
     {trig = "sqr", dscr = "√ symbol"},
     {
       t("\\sqrt{"), i(1, "content"), t("}"),
+      i(0)
+    }
+  ),
+  -- gcd 
+  s(
+    {trig = "gcd", dscr = "greatest common divisor"},
+    {
+      t("\\gcd("), i(1, "a"), t(","), i(2, "b"), t(")"),
+      i(0)
+    }
+  ),
+  -- mod
+  s(
+    {trig = "mod", dscr = "modular operator"},
+    {
+      t("\\mod"),
+      i(0)
+    }
+  ),
+  -- kernel 
+  s(
+    {trig = "ker", dscr = "kernel"},
+    {
+      t("\\ker"),
+      i(0)
+    }
+  ),
+  -- image 
+  s(
+    {trig = "img", dscr = "image"},
+    {
+      t("\\Ima"),
+      i(0)
+    }
+  ),
+  --minimum 
+  s(
+    {trig = "min", dscr = "minimum"},
+    {
+      t("\\min"),
+      i(0)
+    }
+  ),
+  --maximum 
+  s(
+    {trig = "max", dscr = "maximum"},
+    {
+      t("\\max"),
       i(0)
     }
   ),

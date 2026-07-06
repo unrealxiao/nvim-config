@@ -28,7 +28,8 @@ keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) 
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
 -- access to system clipboard
 keymap.set({"n", "v"}, "<leader>y", [["+y]])
-
+-- select texts in between $ symbols
+vim.keymap.set({'o', 'x'}, 'i$', ':<C-u>normal! T$vt$<CR>', { desc = 'select inside dollar signs' })
 --below are functions specific for latex 
 local function create_inkscape_figure() -- open Inkscape directly in LaTeX
     -- Get the directory of the current LaTeX file

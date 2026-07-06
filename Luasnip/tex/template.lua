@@ -12,9 +12,9 @@ return{
   --lecture note template
   s(
     {trig = "lecture", dscr = "lecture template"}, {
-      t(
+      t({
         "\\documentclass[a4paper, 12pt]{report}"
-      ),
+      }),
       t({
         "", "\\usepackage{setspace}"
       }),
@@ -89,6 +89,9 @@ return{
       t(
         "\\documentclass[11pt]{article}"
       ),
+      t({
+        "", "\\setlength{\\parindent}{0pt}"
+      }),
       t({
         "", "\\usepackage{setspace}"
       }),

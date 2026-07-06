@@ -136,36 +136,36 @@ return{
   --round bracket
   s(
     {trig = "rob", dscr = "round bracket"}, {
-      t("\\left("),
+      t("\\left( "),
       i(1, "content"),
-      t("\\right)"),
+      t(" \\right)"),
       i(0)
     }
   ),
   --angled bracket
   s(
     {trig = "anb", dscr = "angled bracket"}, {
-      t("\\left\\langle"),
+      t("\\left\\langle "),
       i(1, "content"),
-      t("\\right\\rangle"),
+      t(" \\right\\rangle"),
       i(0)
     }
   ),
   --curly bracket
   s(
     {trig = "cub", dscr = "curly bracket"}, {
-      t("\\left\\{"),
+      t("\\left\\{ "),
       i(1, "content"),
-      t("\\right\\}"),
+      t(" \\right\\}"),
       i(0)
     }
   ),
   --square bracket
   s(
     {trig = "sqb", dscr = "square bracket"}, {
-      t("\\left["),
+      t("\\left[ "),
       i(1, "content"),
-      t("\\right]"),
+      t(" \\right]"),
       i(0)
     }
   ),
