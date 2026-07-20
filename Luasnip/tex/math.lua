@@ -380,6 +380,14 @@ return{
       i(0)
     }
   ),
+  -- bar above letter
+  s(
+    {trig = "bar", dscr = "bar above letter"},
+    {
+      t("\\bar{"), i(1), t("}"),
+      i(0)
+    }
+  ),
   -- fraction
   s(
     {trig = "fra", dscr = "fraction symbol"},

@@ -174,8 +174,8 @@ return{
     {trig = "nom", dscr = "norm symbol and abs symbol"}, {
       c(1,
         {
-          sn(nil, {t("\\left|"), r(1, "user_text"), t("\\right|") }),
-          sn(nil, {t("\\left|\\left|"), r(1, "user_text"), t("\\right|\\right|") }),
+          sn(nil, {t("\\left| "), r(1, "user_text"), t(" \\right|") }),
+          sn(nil, {t("\\left|\\left| "), r(1, "user_text"), t(" \\right|\\right|") }),
         }
       ),
     },
