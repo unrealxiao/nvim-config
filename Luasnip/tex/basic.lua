@@ -51,7 +51,7 @@ return{
     {
       t({"\\begin{figure}[htbp]"}),
       t({"", "  \\centering"}),
-      t({"", "  \\includegraphics[width="}), i(1, "0.4"), t("\\textwidth]{"), i(2, "figure"), t("}"),
+      t({"", "  \\includegraphics[width="}), i(1, "0.4"), t("\\textwidth]{"), i(2),
       t({"", "  \\caption{"}), i(3, "caption"), t("}"),
       t({"", "  \\label{"}), i(4, "figure label"), t("}"),
       t({"", "\\end{figure}"}),
@@ -90,9 +90,19 @@ return{
   s(
     {trig = "Defl", dscr = "Labeled Definition zone"}, {
       t("\\begin{definitionbox_label}[label="), i(1, "label"), t({"]", ""}),
-      t({"", "  {\\bfseries "}), i(2, "theoremname"), t("} \\\\"),
+      t({"", "  {\\large\\bfseries "}), i(2, "defname"), t("} \\\\"),
       t({"", "  {\\itshape "}), i(3, "main body"), t("\\par}"),
       t({"", "\\end{definitionbox_label}"}),
+      i(0)
+    }
+  ),
+  --snipet for Example label
+  s(
+    {trig = "Exal", dscr = "Labeled example zone"}, {
+      t("\\begin{examplebox_label}[label="), i(1, "label"), t({"]", ""}),
+      t({"", "  {\\bfseries "}), i(2, "example"), t("} \\\\"),
+      t({"", "  {\\itshape "}), i(3, "main body"), t("\\par}"),
+      t({"", "\\end{examplebox_label}"}),
       i(0)
     }
   ),
@@ -194,6 +204,22 @@ return{
       t("}{"),
       i(2, "text above"),
       t("}")
+    }
+  ),
+  -- add label
+  s(
+    {trig = "lab", dscr = "add label for reference later"},
+    {
+      t("\\label{"), i(1), t("}"),
+      i(0)
+    }
+  ),
+  -- add reference
+  s(
+    {trig = "ref", dscr = "reference the previous label"},
+    {
+      t("~\\ref{"), i(1),
+      i(0)
     }
   ),
 }

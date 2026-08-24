@@ -425,7 +425,7 @@ return{
   s(
     {trig = "prd", dscr = "Π symbol"},
     {
-      t("\\Pi"),
+      t("\\prod_{"), i(1), t("}^{"), i(2), t("}"),
       i(0)
     }
   ),
@@ -596,6 +596,22 @@ return{
     {trig = "max", dscr = "maximum"},
     {
       t("\\max"),
+      i(0)
+    }
+  ),
+  --rank
+  s(
+    {trig = "ran", dscr = "rank"},
+    {
+      t("\\rank"),
+      i(0)
+    }
+  ),
+  --null
+  s(
+    {trig = "nul", dscr = "null"},
+    {
+      t("\\nul"),
       i(0)
     }
   ),
