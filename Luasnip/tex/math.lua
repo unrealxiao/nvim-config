@@ -293,7 +293,7 @@ return{
   ),
   -- mu
   s(
-    {trig = "mu", dscr = "μ symbol"},
+    {trig = "muu", dscr = "μ symbol"},
     {
       t("\\mu"),
       i(0)
@@ -331,6 +331,38 @@ return{
       i(0)
     }
   ),
+  --sigma
+  s(
+    {trig = "sig", dscr = "σ symbol"},
+    {
+      t("\\sigma"),
+      i(0)
+    }
+  ),
+  --psi
+  s(
+    {trig = "sih", dscr = " ψ symbol"},
+    {
+      t("\\psi"),
+      i(0)
+    }
+  ),
+  --pi
+  s(
+    {trig = "pii", dscr = " π symbol"},
+    {
+      t("\\pi"),
+      i(0)
+    }
+  ),
+  --rho
+  s(
+    {trig = "rol", dscr = " ρ symbol"},
+    {
+      t("\\rho"),
+      i(0)
+    }
+  ),
   --sin operator
   s(
     {trig = "sin", dscr = "sin operator"},
@@ -364,6 +396,22 @@ return{
       i(0)
     }
   ),
+  --left right arrow
+  s(
+    {trig = "lra", dscr = "right arrow symbol"},
+    {
+      t("\\Leftrightarrow"),
+      i(0)
+    }
+  ),
+  -- maps to 
+  s(
+    {trig = "mpt", dscr = "maps to"},
+    {
+      t("\\mapsto"),
+      i(0)
+    }
+  ),
   -- uniform convergence arrow
   s(
     {trig = "dra", dscr = "double right arrow symbol"},
@@ -374,7 +422,7 @@ return{
   ),
   -- long right arrow
   s(
-    {trig = "lra", dscr = "long right arrow symbol"},
+    {trig = "loa", dscr = "long right arrow symbol"},
     {
       t("\\longrightarrow"),
       i(0)
@@ -415,7 +463,7 @@ return{
   ),
   -- power 
   s(
-    {trig = "6", dscr = "∧ symbol"},
+    {trig = "=", dscr = "∧ symbol"},
     {
       t("^{"), i(1), t("}"),
       i(0)
@@ -535,6 +583,14 @@ return{
       i(0)
     }
   ),
+  -- equivalence relation
+  s(
+    {trig = "til", dscr = "~ symbol"},
+    {
+      t("\\sim"),
+      i(0)
+    }
+  ),
   -- cross product
   s(
     {trig = "cro", dscr = "× symbol"},
@@ -612,6 +668,70 @@ return{
     {trig = "nul", dscr = "null"},
     {
       t("\\nul"),
+      i(0)
+    }
+  ),
+  --function composition
+  s(
+    {trig = "com", dscr = "function composition"},
+    {
+      t("\\circ"),
+      i(0)
+    }
+  ),
+  --Group action
+  s(
+    {trig = "act", dscr = "group action"},
+    {
+      t("\\circlearrowright"),
+      i(0)
+    }
+  ),
+  --semi direct product
+  s(
+    {trig = "smd", dscr = "semi-direct product"},
+    {
+      t("\\rtimes"),
+      i(0)
+    }
+  ),
+  --emptyset
+  s(
+    {trig = "emp", dscr = "empty set"},
+    {
+      t("\\emptyset"),
+      i(0)
+    }
+  ),
+  --overline
+  s(
+    {trig = "orl", dscr = "bar over text"},
+    {
+      t("\\overline{"), i(1), t("}"),
+      i(0)
+    }
+  ),
+  --backslash
+  s(
+    {trig = "bas", dscr = "backslash"},
+    {
+      t("\\backslash"),
+      i(0)
+    }
+  ),
+  --triangle
+  s(
+    {trig = "tra", dscr = "△"},
+    {
+      t("\\triangle"),
+      i(0)
+    }
+  ),
+  --add text
+  s(
+    {trig = "txt", dscr = "add text in math mode"},
+    {
+      t("\\text{"), i(1), t("}"),
       i(0)
     }
   ),

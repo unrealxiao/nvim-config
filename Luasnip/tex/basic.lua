@@ -61,7 +61,7 @@ return{
   --snipet for Definition text bloock
   s(
     {trig = "Def", dscr = "Definition zone"}, {
-      t("{\\large\\bfseries Definition "), i(1, "1.1"), t("} \\\\"),
+      t("{\\large\\bfseries "), i(1, "Definition 1.1"), t("} \\\\"),
       t({"", "{\\itshape "}), i(2, "main body of the Def"), t("\\par}"),
       i(0)
     }
@@ -70,7 +70,7 @@ return{
   s(
     {trig = "Thm", dscr = "Theorem zone"}, {
       t("\\begin{theorembox}", ""),
-      t({"", "  {\\large\\bfseries Theorem "}), i(1, "1.1"), t("} \\\\"),
+      t({"", "  {\\large\\bfseries "}), i(1, "theorem 1.1"), t("} \\\\"),
       t({"", "  "}), i(2, "main body"),
       t({"", "\\end{theorembox}"}),
       i(0)
@@ -80,8 +80,7 @@ return{
   s(
     {trig = "Thml", dscr = "Labeled Theorem zone"}, {
       t("\\begin{theorembox_label}[label="), i(1, "label"), t({"]", ""}),
-      t({"", "  {\\large\\bfseries "}), i(2, "theoremname"), t("} \\\\"),
-      t({"", "  "}), i(3, "main body"),
+      t({"", "  "}), i(2, "main body"),
       t({"", "\\end{theorembox_label}"}),
       i(0)
     }
@@ -90,8 +89,7 @@ return{
   s(
     {trig = "Defl", dscr = "Labeled Definition zone"}, {
       t("\\begin{definitionbox_label}[label="), i(1, "label"), t({"]", ""}),
-      t({"", "  {\\large\\bfseries "}), i(2, "defname"), t("} \\\\"),
-      t({"", "  {\\itshape "}), i(3, "main body"), t("\\par}"),
+      t({"", "  {\\itshape "}), i(2, "main body"), t("\\par}"),
       t({"", "\\end{definitionbox_label}"}),
       i(0)
     }
@@ -101,7 +99,7 @@ return{
     {trig = "Exal", dscr = "Labeled example zone"}, {
       t("\\begin{examplebox_label}[label="), i(1, "label"), t({"]", ""}),
       t({"", "  {\\bfseries "}), i(2, "example"), t("} \\\\"),
-      t({"", "  {\\itshape "}), i(3, "main body"), t("\\par}"),
+      t({"", "  "}), i(3, "main body"),
       t({"", "\\end{examplebox_label}"}),
       i(0)
     }
