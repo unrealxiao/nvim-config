@@ -363,6 +363,46 @@ return{
       i(0)
     }
   ),
+  --chi
+  s(
+    {trig = "kai", dscr = " χ symbol"},
+    {
+      t("\\mathcal{X}"),
+      i(0)
+    }
+  ),
+  --eta
+  s(
+    {trig = "ita", dscr = " η symbol"},
+    {
+      t("\\eta"),
+      i(0)
+    }
+  ),
+  --gamma
+  s(
+    {trig = "gam", dscr = " γ symbol"},
+    {
+      t("\\gamma"),
+      i(0)
+    }
+  ),
+  --xi
+  s(
+    {trig = "xii", dscr = " ξ symbol"},
+    {
+      t("\\xi"),
+      i(0)
+    }
+  ),
+  --nu
+  s(
+    {trig = "nuu", dscr = " v symbol"},
+    {
+      t("\\nu"),
+      i(0)
+    }
+  ),
   --sin operator
   s(
     {trig = "sin", dscr = "sin operator"},
@@ -575,6 +615,14 @@ return{
       i(0)
     }
   ),
+  -- direct product symbol
+  s(
+    {trig = "oco", dscr = "⊗ symbol"},
+    {
+      t("\\otimes"),
+      i(0)
+    }
+  ),
   -- dot product
   s(
     {trig = "dot", dscr = "dot product symbol"},
@@ -695,6 +743,14 @@ return{
       i(0)
     }
   ),
+  --normal subgroup symbol
+  s(
+    {trig = "nrm", dscr = "normal subgroup symbol ⊴"},
+    {
+      t("\\trianglelefteq"),
+      i(0)
+    }
+  ),
   --emptyset
   s(
     {trig = "emp", dscr = "empty set"},
@@ -708,6 +764,14 @@ return{
     {trig = "orl", dscr = "bar over text"},
     {
       t("\\overline{"), i(1), t("}"),
+      i(0)
+    }
+  ),
+  --underline
+  s(
+    {trig = "udl", dscr = "bar under text"},
+    {
+      t("\\underline{"), i(1), t("}"),
       i(0)
     }
   ),
@@ -727,11 +791,35 @@ return{
       i(0)
     }
   ),
+  -- plus minus symbol
+  s(
+    {trig = "pmm", dscr = "±"},
+    {
+      t("\\pm"),
+      i(0)
+    }
+  ),
+  -- not divide 
+  s(
+    {trig = "ndv", dscr = "not divide ∤"},
+    {
+      t("\\nmid"),
+      i(0)
+    }
+  ),
   --add text
   s(
     {trig = "txt", dscr = "add text in math mode"},
     {
       t("\\text{"), i(1), t("}"),
+      i(0)
+    }
+  ),
+  --tilde over text
+  s(
+    {trig = "uti", dscr = "~ over text"},
+    {
+      t("\\tilde{"), i(1), t("}"),
       i(0)
     }
   ),

@@ -74,9 +74,9 @@ return{
       }),
       t({
         "", "  \\chapter{"
-      }), i(3, "Introduction"), t({"}", ""}),
+      }), i(3, "Introduction"), t({"}"}),
       t({
-        "", "  \\section{"
+        "", "    \\section{"
       }), i(4, "Sleek"), t({"}",}),
       t({
         "", "\\end{document}"

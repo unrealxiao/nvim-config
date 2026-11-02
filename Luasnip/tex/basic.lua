@@ -45,7 +45,7 @@ return{
       i(0)
     }
   ),
-  -- graph section 
+  -- general graph section 
   s(
     {trig = "gra", dscr = "insert graph"},
     {
@@ -58,11 +58,23 @@ return{
       i(0)
     }
   ),
+  -- graph section inside tcolorbox
+  s(
+    {trig = "tgr", dscr = "insert graph in tcolorbox"},
+    {
+      t({"", "  \\centering"}),
+      t({"", "  \\includegraphics[width="}), i(1, "0.4"), t("\\textwidth]{"), i(2),
+      t({"", "  \\label{"}), i(3, "figure label"), t("}"),
+      i(0)
+    }
+  ),
   --snipet for Definition text bloock
   s(
     {trig = "Def", dscr = "Definition zone"}, {
       t("{\\large\\bfseries "), i(1, "Definition 1.1"), t("} \\\\"),
-      t({"", "{\\itshape "}), i(2, "main body of the Def"), t("\\par}"),
+      t({"", "{\\itshape "}),
+      t({"", "  "}), i(2, "main body of the Def"),
+      t({"", "\\par}"}),
       i(0)
     }
   ),
@@ -89,7 +101,9 @@ return{
   s(
     {trig = "Defl", dscr = "Labeled Definition zone"}, {
       t("\\begin{definitionbox_label}[label="), i(1, "label"), t({"]", ""}),
-      t({"", "  {\\itshape "}), i(2, "main body"), t("\\par}"),
+      t({"", "{\\itshape "}),
+      t({"", "  "}), i(2, "main body"),
+      t({"", "\\par}"}),
       t({"", "\\end{definitionbox_label}"}),
       i(0)
     }
@@ -193,11 +207,22 @@ return{
       }
     }
   ),
-  -- put subscript text above and under the main text
+  -- put subscript text under the main text
   s(
-    {trig = "abu", dscr = "put text above and under main text"},
+    {trig = "und", dscr = "put text under main text"},
     {
-      t("\\limits_{"),
+      t("\\underset_{"),
+      i(1, "text underneath"),
+      t("}{"),
+      i(2, "text above"),
+      t("}")
+    }
+  ),
+  -- put subscript above the main text
+  s(
+    {trig = "abo", dscr = "put text abo main text"},
+    {
+      t("\\overset_{"),
       i(1, "text underneath"),
       t("}{"),
       i(2, "text above"),
